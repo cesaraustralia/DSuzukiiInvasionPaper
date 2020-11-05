@@ -1,0 +1,49 @@
+region,region_no,year_detected
+Alabama,1,2011
+Arizona,2,Inf
+Arkansas,3,2012
+California,4,2008
+Colorado,5,2012
+Connecticut,6,2011
+Delaware,7,2011
+Florida,8,2009
+Georgia,9,2011
+Idaho,10,2012
+Illinois,11,2012
+Indiana,12,2012
+Iowa,13,2012
+Kansas,14,Inf
+Kentucky,15,2012
+Louisiana,16,2011
+Maine,17,2011
+Maryland,18,2011
+Massachusetts,19,2011
+Michigan,20,2010
+Minnesota,21,2012
+Mississippi,22,2010
+Missouri,23,2013
+Montana,24,2011
+Nebraska,25,Inf
+Nevada,26,Inf
+New Hampshire,27,2011
+New Jersey,28,2011
+New Mexico,29,Inf
+New York,30,2011
+North Carolina,31,2010
+North Dakota,32,2013
+Ohio,33,2011
+Oklahoma,34,Inf
+Oregon,35,2009
+Pennsylvania,36,2011
+Rhode Island,37,2011
+South Carolina,38,2010
+South Dakota,39,Inf
+Tennessee,40,2011
+Texas,41,2012
+Utah,42,2010
+Vermont,43,2011
+Virginia,44,2011
+Washington,45,2009
+West Virginia,46,2011
+Wisconsin,47,2010
+Wyoming,48,Inf
