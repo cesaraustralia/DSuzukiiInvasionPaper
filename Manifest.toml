@@ -57,6 +57,12 @@ git-tree-sha1 = "46cf2c1668ad07aba5a9d331bdeea994a1f13856"
 uuid = "9e28174c-4ba2-5203-b857-d8d62c4213ee"
 version = "1.0.1"
 
+[[Blink]]
+deps = ["Base64", "BinDeps", "Distributed", "JSExpr", "JSON", "Lazy", "Logging", "MacroTools", "Mustache", "Mux", "Reexport", "Sockets", "WebIO", "WebSockets"]
+git-tree-sha1 = "434893c1f9e9ce59be3f114641e99ef84c4d8f1a"
+uuid = "ad839575-38b3-5650-b840-f874b8c74a25"
+version = "0.12.3"
+
 [[Blosc]]
 deps = ["Blosc_jll"]
 git-tree-sha1 = "84cf7d0f8fd46ca6f1b3e0305b4b4a37afe50fd6"
@@ -304,6 +310,12 @@ deps = ["Cairo", "DynamicGrids", "FieldDefaults", "Graphics", "Gtk"]
 git-tree-sha1 = "a5acf0fba43564717cf071352894fa87a092aa96"
 uuid = "db222a54-9a4e-11e9-2a63-0f03ae0fd449"
 version = "0.5.1"
+
+[[DynamicGridsInteract]]
+deps = ["Blink", "DynamicGrids", "FieldDefaults", "FieldMetadata", "Flatten", "ImageShow", "Interact", "InteractBase", "Mux", "WebIO", "WebSockets"]
+git-tree-sha1 = "1233b611eabe0f940b9060c7a220b6ad6b7f0f60"
+uuid = "3ccff026-9a20-11e9-1704-43e1c6ed0af5"
+version = "0.3.3"
 
 [[EarCut_jll]]
 deps = ["Libdl", "Pkg"]
@@ -584,11 +596,52 @@ git-tree-sha1 = "90bed5fc61d12d10832ebf988988104888eebaca"
 uuid = "2e76f6c2-a576-52d4-95c1-20adfe4de566"
 version = "2.6.1+10"
 
+[[Hiccup]]
+deps = ["MacroTools", "Test"]
+git-tree-sha1 = "6187bb2d5fcbb2007c39e7ac53308b0d371124bd"
+uuid = "9fb69e20-1954-56bb-a84f-559cc56a8ff7"
+version = "0.2.2"
+
 [[ICU_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "0ec2e6e6a049eb8520c19cd8976085afcf2943fb"
 uuid = "a51ab1cf-af8e-5615-a023-bc2c838bba6b"
 version = "67.1.0+2"
+
+[[ImageCore]]
+deps = ["Colors", "FixedPointNumbers", "Graphics", "MappedArrays", "MosaicViews", "OffsetArrays", "PaddedViews", "Reexport", "Requires"]
+git-tree-sha1 = "b6d3bc61ad9509332317c280b4b271f7d3a3b5ae"
+uuid = "a09fc81d-aa75-5fe9-8630-4744c3626534"
+version = "0.8.18"
+
+[[ImageIO]]
+deps = ["FileIO", "PNGFiles"]
+git-tree-sha1 = "5eb06178e68c139617fa7926fa0d73ddf9b80e2a"
+uuid = "82e4d734-157c-48bb-816b-45c225c6df19"
+version = "0.3.1"
+
+[[ImageMagick]]
+deps = ["FileIO", "ImageCore", "ImageMagick_jll", "InteractiveUtils", "Libdl", "Pkg", "Random"]
+git-tree-sha1 = "02558f83932fde6ebd3ab007dbff6bd8740a8247"
+uuid = "6218d12a-5da1-5696-b52f-db25d2ecc6d1"
+version = "1.1.6"
+
+[[ImageMagick_jll]]
+deps = ["JpegTurbo_jll", "Libdl", "Libtiff_jll", "Pkg", "Zlib_jll", "libpng_jll"]
+git-tree-sha1 = "1c0a2295cca535fabaf2029062912591e9b61987"
+uuid = "c73af94c-d91f-53ed-93a7-00f77d67a9d7"
+version = "6.9.10-12+3"
+
+[[ImageShow]]
+deps = ["Base64", "FileIO", "ImageCore", "Requires"]
+git-tree-sha1 = "c9df184bc7c2e665f971079174aabb7d18f1845f"
+uuid = "4e3cecfd-b093-5904-9786-8bbb286a6a31"
+version = "0.2.3"
+
+[[IndirectArrays]]
+git-tree-sha1 = "c2a145a145dc03a7620af1444e0264ef907bd44f"
+uuid = "9b13fd28-a010-5f03-acff-a1bbcff69959"
+version = "0.5.1"
 
 [[IniFile]]
 deps = ["Test"]
@@ -703,6 +756,12 @@ deps = ["Formatting", "InteractiveUtils", "LaTeXStrings", "MacroTools", "Markdow
 git-tree-sha1 = "a8bea922a4678d5d2314b2fc97df0170a2271126"
 uuid = "23fbe1c1-3f47-55db-b15f-69d7ec21a316"
 version = "0.14.3"
+
+[[Lazy]]
+deps = ["MacroTools"]
+git-tree-sha1 = "1370f8202dac30758f3c345f9909b97f53d87d3f"
+uuid = "50d2b5c4-7a5e-59d5-8109-a42b560f39c0"
+version = "0.15.1"
 
 [[LearnBase]]
 git-tree-sha1 = "a0d90569edd490b82fdc4dc078ea54a5a800d30a"
@@ -837,6 +896,12 @@ git-tree-sha1 = "6a8a2a625ab0dea913aba95c11370589e0239ff0"
 uuid = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
 version = "0.5.6"
 
+[[MappedArrays]]
+deps = ["FixedPointNumbers"]
+git-tree-sha1 = "b92bd220c95a8bbe89af28f11201fd080e0e3fe7"
+uuid = "dbb5928d-eab1-5f90-85c2-b9b0edb7c900"
+version = "0.3.0"
+
 [[Markdown]]
 deps = ["Base64"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
@@ -873,11 +938,29 @@ version = "0.1.1"
 [[Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
+[[MosaicViews]]
+deps = ["MappedArrays", "OffsetArrays", "PaddedViews"]
+git-tree-sha1 = "614e8d77264d20c1db83661daadfab38e8e4b77e"
+uuid = "e94cdb99-869f-56ef-bcf0-1ae2bcbe0389"
+version = "0.2.4"
+
 [[MozillaCACerts_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "bbcac5afd9049834366c3b68d792971e3d981799"
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
 version = "2020.10.14+0"
+
+[[Mustache]]
+deps = ["Printf", "Tables"]
+git-tree-sha1 = "f5d718790ff475b5b8ab9c1599ed105f0f24f253"
+uuid = "ffc61752-8dc7-55ee-8c37-f3e9cdd09e70"
+version = "1.0.8"
+
+[[Mux]]
+deps = ["AssetRegistry", "Base64", "HTTP", "Hiccup", "Lazy", "Pkg", "Sockets", "WebSockets"]
+git-tree-sha1 = "8e917fbe96da22628feae3f01b4f100e709ab746"
+uuid = "a975b10e-0019-58db-a62f-e48ff68538c9"
+version = "0.7.3"
 
 [[NCDatasets]]
 deps = ["BinDeps", "CFTime", "CondaBinDeps", "DataStructures", "Dates", "Libdl", "Printf"]
@@ -972,11 +1055,23 @@ git-tree-sha1 = "95a4038d1011dfdbde7cecd2ad0ac411e53ab1bc"
 uuid = "90014a1f-27ba-587c-ab20-58faa44d9150"
 version = "0.10.1"
 
+[[PNGFiles]]
+deps = ["CEnum", "ImageCore", "IndirectArrays", "OffsetArrays", "libpng_jll"]
+git-tree-sha1 = "e5cefb581115ab216c4a76819747bbeb6eb2948e"
+uuid = "f57f5aa1-a3ce-4bc8-8ab9-96f992907883"
+version = "0.3.2"
+
 [[PROJ_jll]]
 deps = ["LibCURL_jll", "Libdl", "Libtiff_jll", "Pkg", "SQLite_jll"]
 git-tree-sha1 = "8f30d3c8cc794b2fd2d20b7d7b6511acf3390c03"
 uuid = "58948b4f-47e0-5654-a9ad-f609743f8632"
 version = "7.0.1+0"
+
+[[PaddedViews]]
+deps = ["OffsetArrays"]
+git-tree-sha1 = "24f4e937212b79ced6bcba6c4788407081ed68f0"
+uuid = "5432bcbf-9aad-5242-b902-cca2824c8663"
+version = "0.5.6"
 
 [[Pango_jll]]
 deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "FriBidi_jll", "Glib_jll", "HarfBuzz_jll", "JLLWrappers", "Libdl", "Pkg"]
@@ -1063,6 +1158,18 @@ deps = ["Distributed", "Printf"]
 git-tree-sha1 = "4cff8da83f89e06eeae5b81307a08bb33a96a602"
 uuid = "92933f4c-e287-5a05-a399-4b506db050ca"
 version = "1.4.0"
+
+[[PyCall]]
+deps = ["Conda", "Dates", "Libdl", "LinearAlgebra", "MacroTools", "Serialization", "VersionParsing"]
+git-tree-sha1 = "b6dff5fa725eff4f775f472acd86756d6e31fb02"
+uuid = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
+version = "1.92.1"
+
+[[PyPlot]]
+deps = ["Colors", "LaTeXStrings", "PyCall", "Sockets", "Test", "VersionParsing"]
+git-tree-sha1 = "67dde2482fe1a72ef62ed93f8c239f947638e5a2"
+uuid = "d330b81b-6aea-500a-939a-2ce795aea3ee"
+version = "2.9.0"
 
 [[QuadGK]]
 deps = ["DataStructures", "LinearAlgebra"]

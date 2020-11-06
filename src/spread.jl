@@ -1,10 +1,17 @@
 
-# basedir = joinpath(@__DIR__, "..")
-basedir = "/home/raf/julia/SpottedWingPaper"
+basedir = realpath(joinpath(@__DIR__, ".."))
 floattype = Float64
 # Set the input data used in human dispersal models
 humanactivity = :gdp
 # humanactivity = :pop
+
+# Set simulation replicates and grid aggregation
+# Fast but innacurate
+nreps = 2
+scale = 10
+# Slow but accurate: for the paper
+# nreps = 100
+# scale = 2
 
 include(joinpath(basedir, "src", "spreadsetup.jl"))
 
@@ -65,9 +72,8 @@ ruleset = reconstruct(ruleset, stochparams[:full])
 #     fps=50,
 # )
 # display(output)
-
 # And save the simulation as a gif:
-savegif(joinpath(basedir, "output/dispersal.gif"), output, ruleset; fps=10)
+# savegif(joinpath(basedir, "output/dispersal.gif"), output, ruleset; fps=10)
 
 
 ## Mapping incursion-point sensitivity
@@ -100,7 +106,6 @@ end
 
 # Plot the initial incursion:
 
-nreps = 1
 output = ArrayOutput(init; tspan=tspan, aux=aux, mask=boolmask)
 established = incursionreps!(output, ruleset, missingmask_, nreps)
 incursionplot(established, locname, nreps)
@@ -213,8 +218,7 @@ function spread_probability!(output, I...;
     return acc
 end
 
-pyplot()
-nreps = 100
+pyplot() 
 oneyear = DateTime(2021):Month(1):DateTime(2022)
 output = ArrayOutput(init; tspan=oneyear, aux=aux, mask=boolmask)
 spreaddir = joinpath(basedir, "output/spread_probability")
@@ -239,8 +243,6 @@ end
 
 # Incursion locations from a spreadsheet
 
-nreps = 100
-scale = 2
 cellsinvaded = GeoData.aggregate(Center(), populationgrid, scale) .* 0
 @set! cellsinvaded.name = "Cells invaded"
 cellsinvaded6_summer = deepcopy(cellsinvaded)
@@ -253,16 +255,17 @@ init = (population=zero(populationgrid),)
 
 # Summer sims
 extent = DynamicGrids.Extent(init, boolmask, aux, tspan)
-@time incursion_point_grid!(cellsinvaded6_summer, cellsinvaded12_summer, ruleset, extent, nreps, scale, "summer"; write=false)
+@time incursion_point_grid!(
+    cellsinvaded6_summer, cellsinvaded12_summer, ruleset, extent, nreps, scale, "summer"; 
+    write=false
+)
 
 # Winter sims
 @set! extent.tspan = tspan_winter
-@time incursion_point_grid!(cellsinvaded6_winter, cellsinvaded12_winter, ruleset, extent, nreps, scale, "winter"; write=false)
-
-# Save a zip for uploading to RShiny
-run(`zip -r incursion_tiffs.zip $basedir/output/tiffs/.`)
-
-
+@time incursion_point_grid!(
+    cellsinvaded6_winter, cellsinvaded12_winter, ruleset, extent, nreps, scale, "winter"; 
+    write=false
+)
 
 # Now plot and save the combined cells invaded arrays:
 
@@ -284,10 +287,3 @@ plot_cells_invaded(cellsinvaded12_summer, "summer_$humanactivity", 12, nreps, mi
 plot_cells_invaded(cellsinvaded6_winter, "winter_$humanactivity", 6, nreps, missingmask_)
 plot_cells_invaded(cellsinvaded12_winter, "winter_$humanactivity", 12, nreps, missingmask_)
 
-
-
-# Check output
-A = GDALarray("output/cellsinvaded_summer_gdp_6months_$(nreps)reps.tif")
-plot(A)
-
-run(`zip -r incursion_netcdf.zip $basedir/output/.`)

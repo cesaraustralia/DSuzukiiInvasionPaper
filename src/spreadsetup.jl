@@ -116,7 +116,7 @@ us_states = loadstates(joinpath(basedir, "data/US_states.tif"), ())
 
 ### Define the RuleSets ###
 
-growthratesfilepath = joinpath(basedir, "data/sensitivity/growthrates_standard.ncd")
+growthratesfilepath = joinpath(basedir, "output/sensitivity/growthrates_standard.ncd")
 isfile(growthratesfilepath)
 growthrates = NCDarray(growthratesfilepath; crs=crs(aus_states), dimcrs=EPSG(4326)) |> GeoArray |>
     x -> setdims(x, (@set dims(x, Ti).mode.span = Regular(Month(1)))) |>

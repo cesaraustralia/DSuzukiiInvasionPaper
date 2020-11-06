@@ -1,16 +1,25 @@
 
-# basedir = joinpath(@__DIR__, "..")
-basedir = "/home/raf/julia/SpottedWingPaper"
+basedir = realpath(joinpath(@__DIR__, ".."))
+basedir = realpath("/home/raf/.julia/dev/SpottedWingPaper")
+@show basedir 
 floattype = Float64
 # Set the input data used in human dispersal models
 humanactivity = :gdp
 # humanactivity = :pop
 
+# Opimisation and validation settings
+cpu_cores = :multi
+# cpu_cores = :single
+ngroups = 5 # should be your physical cpu cores minus 1
+# groupsize = 50 # Used in the paper - for 250 replicates when ngroups == 5
+groupsize = 1 # Fast - ngroups total replicates, to check the scripts
+
+
+
+
+### Load data and packages ###
+
 include(joinpath(basedir, "src", "spreadsetup.jl"))
-
-
-### Load packages ###
-
 using Optim, LossFunctions, JLD2, FileIO, DataStructures, LabelledArrays, DynamicGridsGtk
 
 ### Load common sctipt functions ###
@@ -117,7 +126,7 @@ function growthrate_sensitivity!(resultdf, rulesets, parametriser, params, stres
         scenario = Symbol(s, :_, c)
         println(scenario)
         # Load growthrates file matching this scenario
-        growthratesfilepath = joinpath(basedir, "data/sensitivity/growthrates_$(scenario).ncd")
+        growthratesfilepath = joinpath(basedir, "output/sensitivity/growthrates_$(scenario).ncd")
         isfile(growthratesfilepath) || error("$growthratesfilepath not found")
         growthrates = NCDarray(growthratesfilepath; crs=crs_, dimcrs=EPSG(4326))[selectors...]  |>
             x -> setdims(x, (@set dims(x, Ti).mode.span = Regular(Month(1)))) |>
@@ -208,12 +217,13 @@ framesperstep = 12
 startmonth = 5
 transformfunc = x -> 2x - 1 # Transform to -1, +1 instead of 0, 1
 lossfunc = ZeroOneLoss()
-# threading = SingleCoreReplicates()
-threading = ThreadedReplicates()
-ngroups = 5 # should be physical cpus - 1
-groupsize = 50
 iterations = 1000
 detectionthreshold = floattype(1e7)
+threading = if cpu_cores == :multi
+    ThreadedReplicates()
+else
+    SingleCoreReplicates()
+end
 
 us_objective = RegionObjective(
     detectionthreshold,
@@ -264,12 +274,13 @@ us_output = RegionOutput((population=parent(us_populationgrid),);
 
 stochparamsfile = "output/stochparams_$humanactivity.jld2"
 optimresultsfile = "output/optimresults_$humanactivity.jld2"
+optimresults = OrderedDict()
 if isfile(stochparamsfile)
+    stochparams = load(stochparamsfile, "stochparams_$humanactivity")
     stochparams = load(stochparamsfile, "stochparams_$humanactivity")
     stochrulesetkeys = keys(stochparams)
     stochparamvals = values(stochparams)
 else
-    optimresults = OrderedDict()
     for key in keys(us_stochastic_rulesets)
         us_parametriser = Parametriser(
             us_stochastic_rulesets[key], us_output, us_objective, transformfunc, lossfunc, ngroups, groupsize, threading
@@ -461,7 +472,7 @@ eu_nohuman_parametriser = Parametriser(
 )
 
 # Parametrise unless an output is already saved
-nohumanfile = "output/params_$(humanactivity)_nohuman.jld2"
+nohumanfile = joinpath(basedir, "output/params_$(humanactivity)_nohuman.jld2")
 if isfile(nohumanfile)
     nohuman_params = load(nohumanfile, "nohuman_params")
     nohuman_paramvals = values(nohuman_params)
@@ -471,7 +482,8 @@ else
     nohuman_paramvals = Optim.minimizer(optimresults[:nohuman])
     nohuman_params = NamedTuple{(:nohuman,)}((nohuman_paramvals,))
 end
-parametrized_nohuman = reconstruct(nohuman, nohuman_paramvals[1], Number)
+
+parametrized_nohuman = reconstruct(nohuman, nohuman_paramvals, Number)
 lossplot(us_output, parametrized_nohuman)
 # regionoutput = regionsim(
     # parametrized_nohuman, us_objective, us_boolmask, us_populationgrid,
@@ -510,8 +522,6 @@ display(resultdf)
 
 # Save results as a csv file
 
-using JLD2
-path = joinpath(basedir, "output/params_$(humanactivity)_nohuman.jld2")
-@ave path nohuman_params
+@save "output/params_$(humanactivity)_nohuman.jld2" nohuman_params
 CSV.write(joinpath(basedir, "output/sensitivity_$(humanactivity)_nohuman.csv"), resultdf)
 CSV.write(joinpath(basedir, "output/params_$(humanactivity)_nohuman.csv"), paramdf)

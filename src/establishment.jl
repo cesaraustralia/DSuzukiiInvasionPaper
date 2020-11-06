@@ -3,8 +3,7 @@
 
 # Set the repo directory. You may need to change this manually in
 # some contexts
-# basedir = joinpath(@__DIR__, "..")
-basedir = "/home/raf/julia/SpottedWingPaper"
+basedir = joinpath(@__DIR__, "..")
 smapfolder = "/home/raf/Data/SMAP_L4_SM_gph_v4"
 # Only set to true if you have an Nvidia GPU and CUDA.jl properly set up.
 use_cuda = true
@@ -43,7 +42,7 @@ T_ref = K(25.0f0°C)
 growthresponse = Layer(:surface_temp, K,
     SchoolfieldIntrinsicGrowth(p, ΔH_A, ΔH_L, Thalf_L, ΔH_H, Thalf_H, T_ref)
 )
-# Optionally p[lot the growth rate curve:
+# Optionally plot the growth rate curve:
 # using Plots, UnitfulRecipes
 # temprange = collect(0.0:0.1:40.0)u"°C"
 # plot(x -> GrowthMaps.conditionalrate(growthresponse, x), temprange)
@@ -105,7 +104,7 @@ scenarios = (; standard=basemodel, stressscenarios...)
 
 # Save NetCDF files for sensitivity analysys
 
-sensitivitydir = joinpath(basedir, "data/sensitivity")
+sensitivitydir = joinpath(basedir, "output/sensitivity")
 mkpath(sensitivitydir)
 for scenario in keys(outputs)
     output = GeoArray(outputs[scenario]; name=:growthrates)
