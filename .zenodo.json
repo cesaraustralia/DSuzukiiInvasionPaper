@@ -1,10 +1,8 @@
 {
     "description": "<p>Julia scripts to accompany the paper \"Predicting the global invasion of Drosophila suzukii to improve biosecurity preparedness\"</p>", 
     "license": "MIT", 
-    "title": "cesaraustralia/GlobalInvasionDrosophilaSuzukiiPaper: Journal submission release", 
-    "version": "0.2", 
     "upload_type": "software", 
-    "publication_date": "2020-11-06", 
+    "publication_date": "2020-12-10", 
     "creators": [
         {
             "name": "James Maino",
@@ -12,17 +10,5 @@
             "name": "Paul Umina"
         }
     ], 
-    "access_right": "open", 
-    "related_identifiers": [
-        {
-            "scheme": "url", 
-            "identifier": "https://github.com/cesaraustralia/GlobalInvasionDrosophilaSuzukiiPaper/tree/0.1", 
-            "relation": "isSupplementTo"
-        }, 
-        {
-            "scheme": "doi", 
-            "identifier": "10.5281/zenodo.4248834", 
-            "relation": "isVersionOf"
-        }
-    ]
+    "access_right": "open" 
 }
