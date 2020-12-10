@@ -5,8 +5,15 @@
     "publication_date": "2020-12-10", 
     "creators": [
         {
-            "name": "James Maino",
-            "name": "Rafael Schouten",
+            "affiliation": "cesar", 
+            "name": "James Maino"
+        },
+        {
+            "affiliation": "cesar", 
+            "name": "Rafael Schouten"
+        },
+        {
+            "affiliation": "cesar", 
             "name": "Paul Umina"
         }
     ], 
