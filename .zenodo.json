@@ -1,5 +1,5 @@
 {
-    "description": "<p>Julia scripts to accompany the paper: Predicting the global invasion of Drosophila suzukii to improve biosecurity preparedness\"</p>", 
+    "description": "<p>Julia scripts to accompany the paper: Predicting the global invasion of Drosophila suzukii to improve biosecurity preparedness</p>", 
     "license":  {
         "id": "MIT"
     },
