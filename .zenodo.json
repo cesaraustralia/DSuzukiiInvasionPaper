@@ -1,21 +1,22 @@
 {
-    "description": "<p>Julia scripts to accompany the paper \"Predicting the global invasion of Drosophila suzukii to improve biosecurity preparedness\"</p>", 
-    "license": "MIT", 
-    "upload_type": "software", 
-    "publication_date": "2020-12-10", 
+    "description": "<p>Julia scripts to accompany the paper: Predicting the global invasion of Drosophila suzukii to improve biosecurity preparedness\"</p>", 
+    "license":  {
+        "id": "MIT"
+    },
+    "access_right": "open",
+    "upload_type": "software",
     "creators": [
         {
-            "affiliation": "cesar", 
+            "affiliation": "Cesar Australia", 
             "name": "James Maino"
         },
         {
-            "affiliation": "cesar", 
+            "affiliation": "Cesar Australia", 
             "name": "Rafael Schouten"
         },
         {
-            "affiliation": "cesar", 
+            "affiliation": "Cesar Australia", 
             "name": "Paul Umina"
         }
-    ], 
-    "access_right": "open" 
+    ]
 }
